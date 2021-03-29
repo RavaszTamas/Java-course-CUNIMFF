@@ -1,0 +1,11 @@
+com.game.battleship
+com.game.battleship.controller.aicontroller
+com.game.battleship.controller.Controller
+com.game.battleship.controller.Validators
+com.game.battleship.domain.HitRepository
+com.game.battleship.domain.Models
+com.game.battleship.domain.MySwingElements
+com.game.battleship.domain.ShipRepository
+com.game.battleship.GUI
+com.game.battleship.MyExceptions
+com.game.battleship.Tests

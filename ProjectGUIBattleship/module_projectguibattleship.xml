@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_projectguibattleship" default="compile.module.projectguibattleship">
+  <dirname property="module.projectguibattleship.basedir" file="${ant.file.module_projectguibattleship}"/>
+  
+  
+  <property name="compiler.args.projectguibattleship" value="-encoding UTF-8 -source 12 -target 12 ${compiler.args}"/>
+  
+  <property name="projectguibattleship.output.dir" value="${module.projectguibattleship.basedir}/out/production/ProjectGUIBattleship"/>
+  <property name="projectguibattleship.testoutput.dir" value="${module.projectguibattleship.basedir}/out/test/ProjectGUIBattleship"/>
+  
+  <path id="projectguibattleship.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="projectguibattleship.module.production.classpath"/>
+  
+  <path id="projectguibattleship.runtime.production.module.classpath">
+    <pathelement location="${projectguibattleship.output.dir}"/>
+  </path>
+  
+  <path id="projectguibattleship.module.classpath">
+    <pathelement location="${projectguibattleship.output.dir}"/>
+  </path>
+  
+  <path id="projectguibattleship.runtime.module.classpath">
+    <pathelement location="${projectguibattleship.testoutput.dir}"/>
+    <pathelement location="${projectguibattleship.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.projectguibattleship">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.projectguibattleship">
+    <patternset refid="excluded.from.module.projectguibattleship"/>
+  </patternset>
+  
+  <path id="projectguibattleship.module.sourcepath">
+    <dirset dir="${module.projectguibattleship.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.projectguibattleship" depends="compile.module.projectguibattleship.production,compile.module.projectguibattleship.tests" description="Compile module ProjectGUIBattleship"/>
+  
+  <target name="compile.module.projectguibattleship.production" description="Compile module ProjectGUIBattleship; production classes">
+    <mkdir dir="${projectguibattleship.output.dir}"/>
+    <javac destdir="${projectguibattleship.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.projectguibattleship}"/>
+      <bootclasspath refid="projectguibattleship.module.bootclasspath"/>
+      <classpath refid="projectguibattleship.module.production.classpath"/>
+      <src refid="projectguibattleship.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.projectguibattleship"/>
+    </javac>
+    
+    <copy todir="${projectguibattleship.output.dir}">
+      <fileset dir="${module.projectguibattleship.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.projectguibattleship.tests" depends="compile.module.projectguibattleship.production" description="compile module ProjectGUIBattleship; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.projectguibattleship" description="cleanup module">
+    <delete dir="${projectguibattleship.output.dir}"/>
+    <delete dir="${projectguibattleship.testoutput.dir}"/>
+  </target>
+</project>

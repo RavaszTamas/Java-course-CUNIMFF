@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='us-ascii'?>
+<project basedir="." default="compile" name="HelloWorld">
+    <description>Hello world application</description>
+
+    <property name="src" location="src"/>
+    <property name="classes" location="classes"/>
+    <property name="doc" location="jdoc"/>
+
+    <target name="init">
+        <mkdir dir="${classes}"/>
+    </target>
+
+    <target name="compile" depends="init" description="Compiles source">
+        <javac debug="true" includeantruntime="false" destdir="${classes}" srcdir="${src}" includes="**/*.java"
+               classpath="${src}"/>
+    </target>
+
+    <target name="run" depends="init,compile" description="Executes program">
+        <java fork="true" classname="cz.cuni.mff.java.example01.Hello" classpath="${classes}"/>
+    </target>
+
+    <target name="clean" description="Deletes generated files">
+        <delete dir="${classes}"/>
+        <delete dir="${doc}"/>
+    </target>
+
+    <target name="jdoc" description="Generates javadoc documentation">
+        <mkdir dir="${doc}"/>
+        <javadoc sourcepath="${src}" destdir="${doc}"/>
+        <!-- <javadoc sourcepath="${src}" destdir="${doc}" link="https://docs.oracle.com/en/java/javase/13/docs/api/"/> -->
+    </target>
+
+</project>
